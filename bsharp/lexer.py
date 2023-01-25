@@ -151,6 +151,8 @@ class Lexer:
                 return token.Token(type=token.RSQUARE, value=curInput)
             case ":":
                 return token.Token(type=token.COLON, value=curInput)
+            case "'":
+                return token.Token(type=token.QUOTE, value=curInput)
             case _:
                 return token.Token(type=token.ILLEGAL, value=curInput)
 
@@ -165,7 +167,9 @@ class Lexer:
         - This is the reason the `reversePos` function is used.
         """
         start = self._curPos
-        while self._curPos < len(self.input) and self.input[self._curPos].isalpha():
+        while self._curPos < len(self.input) and (
+            self.input[self._curPos].isalpha() or self.input[self._curPos] == "-"
+        ):
             self.advancePos()
         end = self._curPos
 

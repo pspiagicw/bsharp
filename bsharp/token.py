@@ -22,6 +22,9 @@ STRING = "STRING"
 EOF = "EOF"
 ILLEGAL = "ILLEGAL"
 
+DEFUN = "fn"
+QUOTE = "QUOTE"
+
 
 class Token:
     """Token class stores the type and value of a token.

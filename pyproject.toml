@@ -28,7 +28,8 @@ markers = [
     "simple: It is a simple test",
     "complex: It is a complex test",
     "lexer: Tests relate to Lexer.",
-    "parser: Tests relate to parser."
+    "parser: Tests relate to parser.",
+    "evaluator: Tests relate to evaluator.",
 ]
 
 

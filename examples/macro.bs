@@ -1,0 +1,3 @@
+(mc create [x y] (fn y [a] (+ a x)))
+
+(create '10 'add10)

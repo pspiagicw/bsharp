@@ -23,7 +23,7 @@ class TestLexer(unittest.TestCase):
 
     def test_arthemetic(self):
         """Test arthemetic symbols."""
-        input = "+-*/:"
+        input = "+-*/:'"
 
         expectedTokens = [
             token.Token(type=token.PLUS, value="+"),
@@ -31,6 +31,7 @@ class TestLexer(unittest.TestCase):
             token.Token(type=token.STAR, value="*"),
             token.Token(type=token.SLASH, value="/"),
             token.Token(type=token.COLON, value=":"),
+            token.Token(type=token.QUOTE, value="'"),
             token.Token(type=token.EOF, value=""),
         ]
 
@@ -90,7 +91,7 @@ class TestLexer(unittest.TestCase):
 
     def test_identifiers(self) -> None:
         """Test identifiers."""
-        input = "add ( minus 5)"
+        input = "add ( minus 5) let-them-win"
 
         expectedTokens = [
             token.Token(type=token.IDENT, value="add"),
@@ -98,6 +99,7 @@ class TestLexer(unittest.TestCase):
             token.Token(type=token.IDENT, value="minus"),
             token.Token(type=token.NUMBER, value="5"),
             token.Token(type=token.RROUND, value=")"),
+            token.Token(type=token.IDENT, value="let-them-win"),
             token.Token(type=token.EOF, value=""),
         ]
 

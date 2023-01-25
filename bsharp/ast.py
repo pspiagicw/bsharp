@@ -4,6 +4,7 @@ from typing import List
 
 from bsharp import token
 from io import StringIO
+from pprint import pformat
 
 
 class Expression:
@@ -20,9 +21,12 @@ class Expression:
         self.value: str
         self.function: token.Token
         self.args: list[Expression]
+        self.body: list[Expression]
+        self.elements: list[Expression]
+        self.expressions: list[Expression]
 
 
-class Program:
+class Program(Expression):
     """Class contains a list of statements."""
 
     def __init__(self):
@@ -33,9 +37,8 @@ class Program:
         """Represent a Program as string."""
         builder = StringIO()
 
-        for expression in self.expressions:
-            builder.write(str(expression))
-            builder.write("\n")
+        builder.write(" Program ")
+        builder.write(pformat(self.expressions))
 
         return builder.getvalue()
 
@@ -49,7 +52,7 @@ class NumberExpression(Expression):
 
     def __repr__(self) -> str:
         """Represent Number as a AST Object."""
-        return f"Integer({self.value})"
+        return f" Integer({self.value}) "
 
 
 class StringExpression(Expression):
@@ -61,7 +64,7 @@ class StringExpression(Expression):
 
     def __repr__(self) -> str:
         """Represent a string expression as str."""
-        return f"String({self.value})"
+        return f" String({self.value}) "
 
 
 class IdentifierExpression(Expression):
@@ -72,8 +75,26 @@ class IdentifierExpression(Expression):
         super().__init__()
 
     def __repr__(self) -> str:
-        """Represetn a ident expression as string."""
-        return f"Identifier({self.value})"
+        """Represent a ident expression as string."""
+        return f" Identifier({self.value}) "
+
+
+class ArrayExpression(Expression):
+    """Array Expression contains a array representation."""
+
+    def __init__(self):
+        """Construct a array expression."""
+        super().__init__()
+
+    def __repr__(self) -> str:
+        """Represent a array expression."""
+        builder = StringIO()
+
+        builder.write(" Array ")
+
+        builder.write(pformat(self.elements))
+
+        return builder.getvalue()
 
 
 class CallExpression(Expression):
@@ -87,13 +108,38 @@ class CallExpression(Expression):
         """Represent a call expression as string."""
         builder = StringIO()
 
-        builder.write(f"Call(function={self.function.getValue()})")
-        builder.write("\n")
-        builder.write("Arguments: \n")
-        for arg in self.args:
-            builder.write(str(arg))
-            builder.write("\n")
+        builder.write(f" Call ( Name( {self.function.getValue()} ) ")
+        builder.write(pformat(self.args, indent=2))
+        builder.write(" ) ")
 
-        builder.write("CALLEND")
+        return builder.getvalue()
+
+
+class FunctionExpression(Expression):
+    """Function Expression contains a representation of a function declaration."""
+
+    def __init__(self):
+        """Construct a function expression."""
+        super().__init__()
+
+    def __repr__(self):
+        """Represent a Function Expression."""
+        builder = StringIO()
+
+        builder.write(" Function ( Name ( ")
+        builder.write(str(self.function))
+        builder.write(" ) ")
+
+        # builder.write(" [ ")
+        # for arg in self.args:
+        #     builder.write(str(arg))
+        # builder.write(" ] ")
+        builder.write(pformat(self.args))
+
+        # for expr in self.body:
+        #     builder.write(str(expr))
+        builder.write(pformat(self.body))
+
+        builder.write(" ) ")
 
         return builder.getvalue()
