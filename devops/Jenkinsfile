@@ -1,0 +1,18 @@
+pipeline {
+    agent {
+        dockerfile {
+            filename 'Dockerfile'
+            dir 'devops'
+        }
+    }
+    stages {
+        stage("Check dependencies") {
+            steps {
+                sh 'python -V'
+                sh 'pip -V'
+                sh 'pipx --version'
+                sh 'tree'
+            }
+        }
+    }
+}
