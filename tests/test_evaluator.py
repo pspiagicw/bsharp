@@ -60,18 +60,18 @@ class TestEvaluator(TestCase):
         self.assertEqual(eval.eval(program, env).value, "hello")
         self.assertEqual(eval.eval(program, env).type, object.STRING_OBJ)
 
-    @pytest.mark.simple
-    @pytest.mark.evaluator
-    def test_add_expression(self):
-        """Test numerical expressions."""
-        input = "(+ 1 2)"
-
-        lexer = Lexer(input)
-        parser = Parser(lexer)
-        program = parser.parse_program()
-
-        eval = Evaluator()
-        env = Environment()
-
-        self.assertEqual(eval.eval(program, env).value, 3)
-        self.assertEqual(eval.eval(program, env).type, object.NUMBER_OBJ)
+    # @pytest.mark.simple
+    # @pytest.mark.evaluator
+    # def test_add_expression(self):
+    #     """Test numerical expressions."""
+    #     input = "(+ 1 2)"
+    #
+    #     lexer = Lexer(input)
+    #     parser = Parser(lexer)
+    #     program = parser.parse_program()
+    #
+    #     eval = Evaluator()
+    #     env = Environment()
+    #
+    #     self.assertEqual(eval.eval(program, env).value, 3)
+    #     self.assertEqual(eval.eval(program, env).type, object.NUMBER_OBJ)

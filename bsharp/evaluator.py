@@ -30,9 +30,6 @@ class Evaluator:
 
         for wanted, given in zip(toMatch, givenArgs):
             print(toMatch, givenArgs, wanted, given)
-            # key = self.eval(given, old)
-            # new_environment.variables[key] = wanted
-            # new_environment.variables[given] = self.eval(wanted, )
 
         return new_environment
 
@@ -50,6 +47,15 @@ class Evaluator:
         else:
             return object.CONST_NIL
 
+    def evaluateCall(
+        self, fn: ast.Expression, environment: Environment
+    ) -> object.Object:
+        """Evaluate any call expression."""
+        name = fn.function.getValue()
+        if name not in environment.functions:
+            return object.Error(message=f"No function named {name} found")
+        return object.CONST_NIL
+
     def eval(self, ex: ast.Expression, env: Environment) -> object.Object:
         """Evaluate any given expression."""
         match type(ex):
@@ -59,11 +65,12 @@ class Evaluator:
                 return object.Number(ex.value)
             case ast.FunctionExpression:
                 return self.evaluateFunction(ex, env)
+            case ast.CallExpression:
+                return self.evaluateCall(ex, env)
             case ast.Program:
                 evaluate = object.CONST_NIL
                 for expression in ex.expressions:
                     evaluate = self.eval(expression, env)
 
                 return evaluate
-
         return object.CONST_NIL

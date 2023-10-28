@@ -21,8 +21,8 @@ def startREPL():
         program = p.parse_program()
         print(program)
         print(p.errors)
-        evaluator = Evaluator()
-        environment = Environment()
+        # evaluator = Evaluator()
+        # environment = Environment()
         # pprint(program.expressions)
 
-        print(evaluator.eval(program, environment))
+        # print(evaluator.eval(program, environment))

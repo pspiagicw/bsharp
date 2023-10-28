@@ -7,6 +7,7 @@ from typing import Any
 NUMBER_OBJ = "NUMBER"
 NIL_OBJECT = "NILL"
 STRING_OBJ = "STRING"
+ERROR_OBJ = "ERROR"
 
 
 class Object:
@@ -60,6 +61,19 @@ class Nil(Object):
     def __repr__(self) -> str:
         """Represent the NIL object."""
         return f"{self.value}"
+
+
+class Error(Object):
+    """Error object for evaluation."""
+
+    def __init__(self, message: str):
+        """Construct the error object."""
+        self.type = ERROR_OBJ
+        self.value = message
+
+    def __repr__(self) -> str:
+        """Represent the error object."""
+        return f"ERROR: {self.value}"
 
 
 CONST_NIL = Nil()

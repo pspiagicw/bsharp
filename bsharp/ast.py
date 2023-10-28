@@ -130,14 +130,8 @@ class FunctionExpression(Expression):
         builder.write(str(self.function))
         builder.write(" ) ")
 
-        # builder.write(" [ ")
-        # for arg in self.args:
-        #     builder.write(str(arg))
-        # builder.write(" ] ")
         builder.write(pformat(self.args))
 
-        # for expr in self.body:
-        #     builder.write(str(expr))
         builder.write(pformat(self.body))
 
         builder.write(" ) ")
