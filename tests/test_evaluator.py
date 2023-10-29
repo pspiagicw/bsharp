@@ -6,14 +6,11 @@ from bsharp.parser import Parser
 from bsharp.evaluator import Evaluator
 from bsharp import object
 from unittest import TestCase
-import pytest
 
 
 class TestEvaluator(TestCase):
     """Test the evaluator."""
 
-    @pytest.mark.simple
-    @pytest.mark.evaluator
     def test_numerical_expression(self):
         """Test numerical expressions."""
         input = "5"
@@ -28,8 +25,6 @@ class TestEvaluator(TestCase):
         self.assertEqual(eval.eval(program, env).value, 5)
         self.assertEqual(eval.eval(program, env).type, object.NUMBER_OBJ)
 
-    @pytest.mark.simple
-    @pytest.mark.evaluator
     def test_last_evaluated(self):
         """Test numerical expressions."""
         input = "5 5 1 5"
@@ -44,8 +39,6 @@ class TestEvaluator(TestCase):
         self.assertEqual(eval.eval(program, env).value, 5)
         self.assertEqual(eval.eval(program, env).type, object.NUMBER_OBJ)
 
-    @pytest.mark.simple
-    @pytest.mark.evaluator
     def test_string_expression(self):
         """Test numerical expressions."""
         input = '"hello"'

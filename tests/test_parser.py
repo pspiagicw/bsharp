@@ -5,14 +5,11 @@ from bsharp.lexer import Lexer
 from bsharp import token
 from bsharp.parser import Parser
 from bsharp import ast
-import pytest
 
 
 class TestParser(TestCase):
     """Test the parser."""
 
-    @pytest.mark.complex
-    @pytest.mark.parser
     def test_defun_expression(self):
         """Test array expression."""
         input = "(fn foo [x y] 10)"
@@ -55,8 +52,6 @@ class TestParser(TestCase):
         self.assertEqual(statement.body[0].value, "10")
         self.assertEqual(statement.body[0].token.getValue(), "10")
 
-    @pytest.mark.simple
-    @pytest.mark.parser
     def test_integer_array_expression(self):
         """Test array expression."""
         input = "[1 2 3]"
@@ -77,8 +72,6 @@ class TestParser(TestCase):
             self.assertEqual(element.value, str(value))
             self.assertEqual(element.token.getValue(), str(value))
 
-    @pytest.mark.simple
-    @pytest.mark.parser
     def test_string_array_expression(self):
         """Test array expression."""
         input = '[ "hello" "something" "more" ]'
@@ -99,8 +92,6 @@ class TestParser(TestCase):
             self.assertEqual(element.value, str(value))
             self.assertEqual(element.token.getValue(), str(value))
 
-    @pytest.mark.simple
-    @pytest.mark.parser
     def test_mixed_arrary_expression(self):
         """Test array expression."""
         input = '[ 1 "something" "more" foo ]'
@@ -130,8 +121,6 @@ class TestParser(TestCase):
             self.assertEqual(element.value, str(value))
             self.assertEqual(element.token.getValue(), str(value))
 
-    @pytest.mark.simple
-    @pytest.mark.parser
     def test_number_expression(self):
         """Test simple function calls."""
         input = "1"
@@ -151,8 +140,6 @@ class TestParser(TestCase):
         self.assertEqual(statement.value, "1")
         self.assertEqual(statement.token.getValue(), "1")
 
-    @pytest.mark.simple
-    @pytest.mark.parser
     def test_string_expression(self):
         """Test simple function calls."""
         input = '"hello"'
@@ -173,8 +160,6 @@ class TestParser(TestCase):
         self.assertEqual(statement.value, "hello")
         self.assertEqual(statement.token.getValue(), "hello")
 
-    @pytest.mark.complex
-    @pytest.mark.parser
     def test_call_expression(self):
         """Test simple function calls."""
         input = "(+ 1 2)"
@@ -203,8 +188,6 @@ class TestParser(TestCase):
         self.assertEqual(args[0].value, "1")
         self.assertEqual(args[1].value, "2")
 
-    @pytest.mark.complex
-    @pytest.mark.parser
     def test_multiple_call_expression(self):
         """Test simple function calls."""
         input = """
@@ -265,8 +248,6 @@ class TestParser(TestCase):
 
         self.assertEqual(args[0].value, "1")
 
-    @pytest.mark.complex
-    @pytest.mark.parser
     def test_ident_call_expression(self):
         """Test expression with ident argument."""
         input = """
@@ -334,8 +315,6 @@ class TestParser(TestCase):
         self.assertEqual(statement.function.getType(), token.IDENT)
         self.assertEqual(statement.function.getValue(), "dump")
 
-    @pytest.mark.complex
-    @pytest.mark.parser
     def test_nested_expressions(self):
         """Test if nested expressions work."""
         input = """ (+  (* variable 2) othervariable (sin reallygoodvariable)) """
