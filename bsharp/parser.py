@@ -1,6 +1,5 @@
 """Parser provides parsing for bsharp."""
 
-
 from bsharp.lexer import Lexer
 from bsharp import ast
 from bsharp import token

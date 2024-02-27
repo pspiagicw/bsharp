@@ -1,0 +1,19 @@
+name = "bsharp"
+
+[task.test]
+command = "pytest"
+description = "Test the project"
+depends = [
+    "format"
+]
+
+[task.format]
+command = "black tests bsharp"
+description = "Format the project"
+
+[task.run]
+command = "python -m bsharp"
+description = "Run the project"
+depends = [
+    "format"
+]

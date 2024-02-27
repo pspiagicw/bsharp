@@ -1,4 +1,5 @@
 """Module tests Lexer for bsharp."""
+
 from typing import List
 import unittest
 from bsharp import lexer

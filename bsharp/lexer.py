@@ -1,4 +1,5 @@
 """Lexer provides lexical analysis for bsharp."""
+
 from bsharp import token
 
 

@@ -1,6 +1,5 @@
 """Internal Object system for bsharp."""
 
-
 from typing import Any
 
 

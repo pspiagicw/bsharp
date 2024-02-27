@@ -1,4 +1,5 @@
 """Environment stores mapping between function, variables and their declaration."""
+
 from bsharp.object import Object
 from bsharp import ast
 
